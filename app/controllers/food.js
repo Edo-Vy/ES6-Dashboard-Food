@@ -1,7 +1,16 @@
+/**
+ *  Thêm thông tin và hiển thị thông tin 
+ */
+
 // import từ MonAn
 import { LOAI_MON } from '../models/constant/constant.js';
 import { TINH_TRANG } from '../models/constant/constant.js';
 import { MonAn } from '../models/MonAn.js';
+
+// Ngôn ngữ
+import {translate} from '../translate/Vi.js';
+
+
 
 document.querySelector('#btnThemMon').onclick = function () {
 
@@ -37,11 +46,15 @@ document.querySelector('#btnThemMon').onclick = function () {
                 giaTri = TINH_TRANG[mon[key]];
 
             };break;
+            case 'hinhMon' : {
+
+                giaTri = `<img src="${mon[key]}" width ="200px" height = "100px"/>`
+            }
         }
         html += ` <li 
                     class="list-group-item d-flex justify-content-between lh-condensed" >
                     <div>
-                         <h6 class="my-0">${key}</h6>
+                         <h6 class="my-0">${translate[key]}</h6>
                      </div>
                     <span id="sp-${key}" class="text-muted">${giaTri}</span>
                 </li>`;
