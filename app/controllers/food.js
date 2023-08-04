@@ -6,10 +6,19 @@
 import { LOAI_MON } from '../models/constant/constant.js';
 import { TINH_TRANG } from '../models/constant/constant.js';
 import { MonAn } from '../models/MonAn.js';
+import { MENU } from '../models/Menu.js';
 
 // Ngôn ngữ
-import {translate} from '../translate/Vi.js';
+import { translate } from '../translate/Vi.js';
 
+// ---- Cách 1: Dùng LocalStorage lưu và lấy dữ liệu => lặp lưu và lấy dữ liệu ( food + food-list) => khó bảo trì, chỉnh sửa
+// let arrMonAn = [];
+
+//==== Cách 2: dùng HĐT Menu
+let menu = new MENU();
+
+menu.layMonAn();
+console.log('menu',menu);
 
 
 document.querySelector('#btnThemMon').onclick = function () {
@@ -45,8 +54,8 @@ document.querySelector('#btnThemMon').onclick = function () {
             case 'tinhTrang': {
                 giaTri = TINH_TRANG[mon[key]];
 
-            };break;
-            case 'hinhMon' : {
+            }; break;
+            case 'hinhMon': {
 
                 giaTri = `<img src="${mon[key]}" width ="200px" height = "100px"/>`
             }
@@ -62,4 +71,34 @@ document.querySelector('#btnThemMon').onclick = function () {
     // DOM đến thẻ ul hiển thị nội dung li
     document.querySelector('ul.list-group').innerHTML = html;
 
+    //Lưu món ăn vào mảng món ăn
+    // arrMonAn.push(mon);
+    // luuMonAn();
+    // menu.danhSachMonAn.push(mon);
+    menu.luuMonAn();
+
 }
+
+// ===== Cách 1
+// // Lưu vào LocalStorge
+// function luuMonAn() {
+//     // Biến đổi mảng món ăn thành chuối
+//     let sMangMonAn = JSON.stringify(arrMonAn);
+//     localStorage.setItem('arrMonAn', sMangMonAn);
+// }
+
+// function layMonAn() {
+//     // Kiểm tra storage có mảng đó hay không => mới lấy ra 
+//     if (localStorage.getItem('arrMonAn')) {
+//         let sMangMonAn = localStorage.getItem('arrMonAn');
+//         arrMonAn = JSON.parse(sMangMonAn);
+//     }
+
+// }
+
+// Đợi html load xong thì các hàm trong function này được gọi
+
+// window.onload = function () {
+//     layMonAn();
+
+// }
